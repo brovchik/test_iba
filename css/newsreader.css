@@ -1,0 +1,53 @@
+body {
+    background-color: #EAEAEA;
+}
+
+.newsreader-viewport {
+    margin: 0 auto;
+    width: 700px;
+}
+
+.newsreader-col {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.newsreader-header-toolbar {
+    margin: 10px 3px 3px 3px;
+}
+
+.newsreader-header-toolbar button {
+    margin-right: 5px;
+}
+
+.newsreader-header-statusbar {
+    text-align: right;
+    margin: 18px 3px 3px 3px;
+}
+
+.newsreader-list-panel,
+.newsreader-content-panel {
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    border: 1px solid #CCCCCC;
+    margin: 3px;
+}
+
+.newsreader-list-panel,
+.newsreader-content-panel {
+    min-height: 600px;
+}
+
+.newsreader-list-panel .list-group-item {
+    border-left: none;
+    border-right: none;
+}
+
+.newsreader-content-panel h2 {
+    padding: 0 15px 10px 15px;
+}
+
+.newsreader-content-panel-body {
+    padding: 10px 15px;
+}
+
