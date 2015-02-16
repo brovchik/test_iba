@@ -1,0 +1,3 @@
+NewsReader.Handler = function(container) {
+
+}
