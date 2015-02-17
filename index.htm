@@ -21,15 +21,16 @@
     <script src="js/NewsReader/ui/NewsContentPanel.js" type="text/javascript"></script>
     <script src="js/NewsReader/ui/NewsListPanel.js" type="text/javascript"></script>
     <script src="js/NewsReader/ui/Viewport.js" type="text/javascript"></script>
-    <script src="js/Script.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(function() {
             var viewport = new NewsReader.ui.Viewport();
             viewport.renderTo($(document.body));
+            $('.newsreader-header-toolbar-load-button').bind('click', renderNewsList);
         });
     </script>
 </head>
 <body>
 
 </body>
+<script src="js/Script.js" type="text/javascript"></script>
 </html>

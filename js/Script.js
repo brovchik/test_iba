@@ -1,5 +1,8 @@
-﻿var loadButton = $('.newsreader-header-toolbar-load-button');
-var newsList = new NewsReader.ui.NewsListPanel();
-var loadHandler = new NewsReader.Handler();
+﻿
 
-loadButton.addEventListener('click', loadHandler.addNewsList());
+function renderNewsList(e) {
+    var newsListPanel = new NewsReader.ui.NewsListPanel();
+    newsListPanel.renderTo($('.newsreader-list-container'));
+    console.log(newsListPanel);
+    alert("function works ");
+}

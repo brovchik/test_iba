@@ -1,12 +1,8 @@
 NewsReader.Handler = function() {
-
-}
-
-NewsReader.Handler.prototype = {
-
     addNewsList: function() {
-        var newsListProvider = new NewsReader.data.NewsServiceProvider('/data');
-        newsListProvider.getNewsHeadlines();
-    }
 
+        debugger;
+        var newsListProvider = new NewsReader.data.NewsServiceProvider('/data');
+        console.log(newsListProvider);
+    }
 }
