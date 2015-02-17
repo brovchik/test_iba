@@ -6,3 +6,8 @@ function renderNewsList(e) {
     console.log(newsListPanel);
     alert("function works ");
 }
+
+
+function attachEvents() {
+    $('.newsreader-header-toolbar-load-button').bind('click', renderNewsList);
+}
