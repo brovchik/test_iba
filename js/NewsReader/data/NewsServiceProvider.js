@@ -26,6 +26,7 @@ NewsReader.data.NewsServiceProvider.prototype = {
                 });
 
                 if (callback) {
+                    console.log(headlines);
                     callback.call(scope, headlines);
                 }
             });

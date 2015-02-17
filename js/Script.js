@@ -1,13 +1,23 @@
-﻿
+﻿function attachEvents() {
+    var handler = new NewsReader.Handler();
+    $('.newsreader-header-toolbar-load-button').bind('click', handler.addN);
+}
 
-function renderNewsList(e) {
-    var newsListPanel = new NewsReader.ui.NewsListPanel();
-    newsListPanel.renderTo($('.newsreader-list-container'));
-    console.log(newsListPanel);
-    alert("function works ");
+function renderNewsList() {
+    var newsServiceProvider = new NewsReader.data.NewsServiceProvider('/data');
+    console.log(newsServiceProvider);
+    newsServiceProvider.getNewsHeadlines(newsListObject.callbackNewsList, 10);
+}
+
+newsListObject = {
+
+    callbackNewsList: function (scope, headlines){
+        var h = headlines;
+        //var listItems = new NewsReader.data.NewsHeadline();
+        console.log(h);
+        //listItems.renderNewsHeadlines(headlines);
+    }
+
 }
 
 
-function attachEvents() {
-    $('.newsreader-header-toolbar-load-button').bind('click', renderNewsList);
-}
