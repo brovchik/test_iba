@@ -1,6 +1,16 @@
-﻿var handler = new NewsReader.Handler();
+﻿/**
+ * @type {NewsReader.Handler} Object for event processing
+ */
+var handler = new NewsReader.Handler();
+
+/**
+ *
+ * @type {NewsReader.data.NewsHeadline[]} headlines
+ */
 var newsList = [];
 
+
+ // Attaching event handlers
 function attachEventToLoadButton() {
     $('.newsreader-header-toolbar-load-button').bind('click', handler.renderNewsList);
 }

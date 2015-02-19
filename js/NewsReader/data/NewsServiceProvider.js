@@ -19,8 +19,9 @@ NewsReader.data.NewsServiceProvider.prototype = {
 
                 var headlines = [];
 
-                //my addition
+                //My addition ----------
                 var headerToolBar = new NewsReader.ui.HeaderToolBar();
+                //----------------------
 
                 $.each(rawHeadlines, function(index, rawHeadline) {
                     var header = new NewsReader.data.NewsHeadline();
@@ -28,13 +29,17 @@ NewsReader.data.NewsServiceProvider.prototype = {
                     headlines.push(header);
                 });
 
-                //my addition
+                // Changing loading button state. Enabling delete button
                 headerToolBar.hideButtonLoadingState($('.newsreader-header-toolbar-load-button'));
                 headerToolBar.enableButton($('.newsreader-header-toolbar-delete-button'));
+
+                //Concatenation to news list array
                 newsList = headlines.concat();
 
-                //updating news counter
+                //Updating news counter
                 var newsCounter = headlines.length;
+
+
                 $('.badge').html(newsCounter);
 
                 if (callback) {

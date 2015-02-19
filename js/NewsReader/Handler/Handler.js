@@ -4,7 +4,12 @@ NewsReader.Handler = function() {
 
 NewsReader.Handler.prototype = {
 
+    /**
+     * First news list loading
+     */
     renderNewsList: function() {
+
+        // Loading required objects
         var newsHeaderToolBar = new NewsReader.ui.HeaderToolBar();
         newsHeaderToolBar.showButtonLoadingState($('.newsreader-header-toolbar-load-button'));
 
@@ -16,19 +21,30 @@ NewsReader.Handler.prototype = {
         var newsContentPanel = new NewsReader.ui.NewsContentPanel();
         newsContentPanel.el = $('.newsreader-content-panel');
 
+        // Getting news headlines and content of the 1st news item
         newsServiceProvider.getNewsHeadlines(newsListPanel.renderNewsHeadlines, newsListPanel);
         newsServiceProvider.getNewsContent(1, newsContentPanel.renderNewsContent, newsContentPanel);
 
-        //bad hack
+        // bad hack
         setTimeout(function() {
             newsListPanel.selectNews(1);
         }, 2100);
+
+        // Attaching listeners to news list ant delete button
         attachEventToListContainer();
         attachEventToDeleteButton();
     },
 
+    /**
+     * Select news item from list
+     *
+     * @param e {Event}
+     */
     selectNews: function(e) {
+
         if($('.list-group').html() != ''){
+
+            // Getting Id of target
             var targetElement = e.target;
             var targetId = parseInt(targetElement.getAttribute('data-id'));
 
@@ -38,19 +54,26 @@ NewsReader.Handler.prototype = {
             var newsContentPanel = new NewsReader.ui.NewsContentPanel();
             newsContentPanel.el = $('.newsreader-content-panel');
 
+            // Getting news item's content
             var newsServiceProvider = new NewsReader.data.NewsServiceProvider('/data');
             newsServiceProvider.getNewsContent(targetId, newsContentPanel.renderNewsContent, newsContentPanel);
 
+            // Deleting existing selections
             var activeNewsItems = $('.list-group>.active');
             for(var i = 0; i < activeNewsItems.length; i++) {
                 var id = parseInt(activeNewsItems[i].getAttribute('data-id'));
                 newsListPanel.deselectNews(id);
             }
 
+            // Select target
             newsListPanel.selectNews(targetId);
         }
     },
 
+
+    /**
+     * Deleting news from list
+     */
     deleteNews: function() {
 
         var newsHeaderToolBar = new NewsReader.ui.HeaderToolBar();
@@ -62,6 +85,8 @@ NewsReader.Handler.prototype = {
         newsContentPanel.el = $('.newsreader-content-panel');
 
         var newsServiceProvider = new NewsReader.data.NewsServiceProvider('/data');
+
+        // Searching and deleting from news list array unnecessary items
         var activeNewsItem = $('.list-group>.active');
         var id = parseInt(activeNewsItem[0].getAttribute('data-id'));
         for(var j = 0; j < newsList.length; j++) {
@@ -71,11 +96,10 @@ NewsReader.Handler.prototype = {
             }
         }
 
-        //updating news counter
+        // Updating news counter
         $('.badge').html(newsList.length);
 
-        debugger;
-        //removing from list and choosing news
+        // Removing from list and choosing next/previous news
         if(newsList.length != 0) {
             newsHeaderToolBar.showButtonLoadingState($('.newsreader-header-toolbar-delete-button'));
             var nextNode = activeNewsItem.next();

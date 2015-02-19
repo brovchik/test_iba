@@ -11,6 +11,7 @@ NewsReader.ui.NewsListPanel.prototype = {
                     '<div class="list-group"></div>' +
                 '</div>',
 
+    // Added data-id attribute
     /**
      * @type {String}
      */
@@ -35,8 +36,6 @@ NewsReader.ui.NewsListPanel.prototype = {
     renderNewsHeadlines: function(headlines) {
         var html = Mustache.render(this.itemsTemplate, {items: headlines});
         this.el.find('.list-group').html(html);
-        //my addition
-        //this.selectNews(1);
     },
 
     /**
