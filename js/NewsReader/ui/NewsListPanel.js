@@ -14,7 +14,7 @@ NewsReader.ui.NewsListPanel.prototype = {
     /**
      * @type {String}
      */
-    itemsTemplate: '{{#items}}<a href="#{{newsId}}" class="list-group-item newsreader-list-panel-item-{{newsId}}">{{title}}</a>{{/items}}',
+    itemsTemplate: '{{#items}}<a href="#{{newsId}}" data-id="{{newsId}}" class="list-group-item newsreader-list-panel-item-{{newsId}}">{{title}}</a>{{/items}}',
 
     /**
      * @type {Object} jQuery Object
@@ -35,6 +35,8 @@ NewsReader.ui.NewsListPanel.prototype = {
     renderNewsHeadlines: function(headlines) {
         var html = Mustache.render(this.itemsTemplate, {items: headlines});
         this.el.find('.list-group').html(html);
+        //my addition
+        this.selectNews(1);
     },
 
     /**
