@@ -59,42 +59,41 @@ NewsReader.Handler.prototype = {
         newsContentPanel.el = $('.newsreader-content-panel');
 
         var newsServiceProvider = new NewsReader.data.NewsServiceProvider('/data');
-
-        debugger;
-        var activeNewsItems = $('.list-group>.active');
-        for(var i = 0; i < activeNewsItems.length; i++) {
-            var id = parseInt(activeNewsItems[i].getAttribute('data-id'));
-            for(var j = 0; j < newsList.length; j++) {
-                if(newsList[j].newsId == id){
-                    newsList.splice(j, 1);
-                    break;
-                }
+        var activeNewsItem = $('.list-group>.active');
+        var id = parseInt(activeNewsItem[0].getAttribute('data-id'));
+        for(var j = 0; j < newsList.length; j++) {
+            if(newsList[j].newsId == id){
+                newsList.splice(j, 1);
+                break;
             }
         }
+
+        //updating news counter
         $('.badge').html(newsList.length);
 
+        debugger;
+        //removing from list and choosing news
         if(newsList.length != 0) {
-            $('.list-group').html('');
-            newsListPanel.renderNewsHeadlines(newsList);
+            var nextNode = activeNewsItem.next();
+            var previousNode = activeNewsItem.prev();
 
-            for(var i = 0; i < activeNewsItems.length; i++) {
-                var id = parseInt(activeNewsItems[i].getAttribute('data-id'));
-                newsListPanel.deselectNews(id);
-            }
-            if(id == newsList.length-1)
-            {
-                newsListPanel.selectNews(newsList.length-1);
-                newsServiceProvider.getNewsContent(newsList.length-1, newsContentPanel.renderNewsContent, newsContentPanel);
+            activeNewsItem.remove();
+            if(nextNode.length != 0) {
+                var nextId = parseInt(nextNode[0].getAttribute('data-id'));
+                newsListPanel.selectNews(nextId);
+                newsServiceProvider.getNewsContent(nextId, newsContentPanel.renderNewsContent, newsContentPanel);
             }
             else {
-                newsListPanel.selectNews(id+1);
-                newsServiceProvider.getNewsContent(id+1, newsContentPanel.renderNewsContent, newsContentPanel);
+                var prevId = parseInt(previousNode[0].getAttribute('data-id'));
+                newsListPanel.selectNews(prevId);
+                newsServiceProvider.getNewsContent(prevId, newsContentPanel.renderNewsContent, newsContentPanel);
             }
         }
         else {
             var newsHeaderToolBar = new NewsReader.ui.HeaderToolBar();
             newsHeaderToolBar.disableButton($('.newsreader-header-toolbar-delete-button'));
-            $('.newsreader-content-panel').html('');
+            $('.list-group').empty();
+            $('.newsreader-content-panel').empty();
         }
 
 
