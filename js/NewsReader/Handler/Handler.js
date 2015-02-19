@@ -52,6 +52,9 @@ NewsReader.Handler.prototype = {
     },
 
     deleteNews: function() {
+
+        var newsHeaderToolBar = new NewsReader.ui.HeaderToolBar();
+
         var newsListPanel = new NewsReader.ui.NewsListPanel();
         newsListPanel.el = $('.newsreader-list-container');
 
@@ -74,23 +77,28 @@ NewsReader.Handler.prototype = {
         debugger;
         //removing from list and choosing news
         if(newsList.length != 0) {
+            newsHeaderToolBar.showButtonLoadingState($('.newsreader-header-toolbar-delete-button'));
             var nextNode = activeNewsItem.next();
             var previousNode = activeNewsItem.prev();
 
             activeNewsItem.remove();
             if(nextNode.length != 0) {
+                setTimeout(function() {
+                    newsHeaderToolBar.hideButtonLoadingState($('.newsreader-header-toolbar-delete-button'));
+                }, 2000);
                 var nextId = parseInt(nextNode[0].getAttribute('data-id'));
                 newsListPanel.selectNews(nextId);
                 newsServiceProvider.getNewsContent(nextId, newsContentPanel.renderNewsContent, newsContentPanel);
             }
             else {
-                var prevId = parseInt(previousNode[0].getAttribute('data-id'));
+                setTimeout(function() {
+                    newsHeaderToolBar.hideButtonLoadingState($('.newsreader-header-toolbar-delete-button'));
+                }, 2000);                var prevId = parseInt(previousNode[0].getAttribute('data-id'));
                 newsListPanel.selectNews(prevId);
                 newsServiceProvider.getNewsContent(prevId, newsContentPanel.renderNewsContent, newsContentPanel);
             }
         }
         else {
-            var newsHeaderToolBar = new NewsReader.ui.HeaderToolBar();
             newsHeaderToolBar.disableButton($('.newsreader-header-toolbar-delete-button'));
             $('.list-group').empty();
             $('.newsreader-content-panel').empty();
