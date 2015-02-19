@@ -31,6 +31,7 @@ NewsReader.data.NewsServiceProvider.prototype = {
                 //my addition
                 headerToolBar.hideButtonLoadingState($('.newsreader-header-toolbar-load-button'));
                 headerToolBar.enableButton($('.newsreader-header-toolbar-delete-button'));
+                newsList = headlines.concat();
 
                 //updating news counter
                 var newsCounter = headlines.length;

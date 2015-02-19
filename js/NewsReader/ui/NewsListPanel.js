@@ -36,7 +36,7 @@ NewsReader.ui.NewsListPanel.prototype = {
         var html = Mustache.render(this.itemsTemplate, {items: headlines});
         this.el.find('.list-group').html(html);
         //my addition
-        this.selectNews(1);
+        //this.selectNews(1);
     },
 
     /**
